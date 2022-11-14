@@ -22,3 +22,11 @@
     transform: translate(-50%, -50%);
     background-color: red;
 }
+
+
+.turn-show{
+    display: flex;
+    gap: 2rem;
+    padding: 1rem;
+    margin: 1rem;
+}

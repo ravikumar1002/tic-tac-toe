@@ -1,5 +1,6 @@
 import clsx from "clsx";
-import { useEffect, useState } from "react";
+import { useContext, useState } from "react";
+import { userInputContext } from "../../context/userInputContext";
 import "./board.css";
 
 enum MarkName {
@@ -7,12 +8,10 @@ enum MarkName {
   O = "O",
 }
 
+
 const Board = () => {
   const [active, setActive] = useState<Record<number, MarkName>>({});
-
-  useEffect(() => {
-    setActive({ 3: MarkName.X });
-  }, []);
+  const a = useContext(userInputContext);
 
   const boxData = [
     {
@@ -53,25 +52,37 @@ const Board = () => {
     },
   ];
 
-  console.log(MarkName);
   return (
-    <div className="board">
-      {boxData.map((data) => {
-        return (
-          <div
-            className={clsx("col", {
-              isActive: Object.keys(active).includes(data.id.toString()),
-            })}
-            data-type={active[data.id]}
-            key={data.id}
-            id={data.id.toString()}
-            onClick={(e) => {
-              const id = e.target.id;
-              setActive((prev) => ({ ...prev, [id]: MarkName.X }));
-            }}
-          ></div>
-        );
-      })}
+    <div>
+      <div className="board">
+        {boxData.map((data) => {
+          return (
+            <div
+              className={clsx("col", {
+                isActive: Object.keys(active).includes(data.id.toString()),
+              })}
+              data-type={active[data.id]}
+              key={data.id}
+              id={data.id.toString()}
+              onClick={(e) => {
+                const id = e.target.id;
+                setActive((prev) => ({ ...prev, [id]: MarkName.O }));
+              }}
+            ></div>
+          );
+        })}
+      </div>
+      <div className="turn-show">
+        <div>X</div>
+        <div>0</div>
+      </div>
+      <button
+        onClick={() => {
+          a?.setShowBoard(false);
+        }}
+      >
+        Restart
+      </button>
     </div>
   );
 };

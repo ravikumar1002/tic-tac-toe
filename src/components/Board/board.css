@@ -5,28 +5,27 @@
   grid-template-columns: 1fr 1fr 1fr;
 }
 
-.col{
-    border: 2px solid white;
-    box-sizing: border-box;
-} 
+.col {
+  border: 2px solid white;
+  box-sizing: border-box;
+}
 
 .col.isActive {
-    position: relative;
+  position: relative;
 }
 
 .col.isActive::after {
-    content: attr(data-type);
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background-color: red;
+  content: attr(data-type);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: red;
 }
 
-
-.turn-show{
-    display: flex;
-    gap: 2rem;
-    padding: 1rem;
-    margin: 1rem;
+.turn-show {
+  display: flex;
+  gap: 2rem;
+  padding: 1rem;
+  margin: 1rem;
 }

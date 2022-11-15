@@ -1,6 +1,3 @@
-// interface homeProps {
-//   setShowBoard: Function;
-// }F
 
 import { useContext } from "react";
 import { userInputContext } from "../context/userInputContext";

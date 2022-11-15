@@ -1,10 +1,11 @@
 import { createContext, ReactNode, useState } from "react";
+import { MarkName } from "../components/Board/Board";
 
 interface userInputContextProps {
   showBoard: boolean;
   setShowBoard: React.Dispatch<React.SetStateAction<boolean>>;
-  activePlayer: string;
-  setActivePlayer: React.Dispatch<React.SetStateAction<string>>;
+  activePlayer: MarkName;
+  setActivePlayer: React.Dispatch<React.SetStateAction<MarkName>>;
 }
 
 const userInputContext = createContext<userInputContextProps | null>(null);
@@ -15,7 +16,8 @@ interface UserInputProviderProps {
 
 const UserInputProvider = ({ children }: UserInputProviderProps) => {
   const [showBoard, setShowBoard] = useState(false);
-  const [activePlayer, setActivePlayer] = useState("X");
+  const [activePlayer, setActivePlayer] = useState<MarkName>(MarkName.X);
+
   return (
     <userInputContext.Provider
       value={{ showBoard, setShowBoard, setActivePlayer, activePlayer }}

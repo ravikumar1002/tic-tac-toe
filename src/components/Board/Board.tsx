@@ -2,6 +2,7 @@ import clsx from "clsx";
 import { useContext, useState } from "react";
 import { userInputContext } from "../../context/userInputContext";
 import Modal from "../Modal/Modal";
+import NoOneWinnerModal from "../Modal/NoOneWinnerModal";
 import "./board.css";
 
 export enum MarkName {
@@ -145,6 +146,9 @@ const Board = () => {
       {a?.winnerPlayer && (
         <Modal winnerPlayer={a?.winnerPlayer} setActive={setActive} />
       )}
+      {!a?.winnerPlayer && active[1] && active[2] && active[3] && active[4] && active[5] && active[6] && active[7] && active[8] &&active[9] &&   <NoOneWinnerModal setActive={setActive} />
+
+      }
     </div>
   );
 };

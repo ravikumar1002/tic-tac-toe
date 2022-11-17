@@ -30,3 +30,7 @@
 .winner-show[data-winner="O"] {
   color: orange;
 }
+
+.no-one-modal {
+  min-height: 10rem;
+}

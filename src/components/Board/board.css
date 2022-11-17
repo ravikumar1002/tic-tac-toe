@@ -1,3 +1,15 @@
+.wrapper {
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  position: relative;
+  top: 0;
+  left: 0;
+}
+
 .board {
   height: 20rem;
   width: 20rem;
@@ -5,27 +17,67 @@
   grid-template-columns: 1fr 1fr 1fr;
 }
 
-.col {
+.heading {
+  font-size: 2rem;
+  line-height: 4rem;
+}
+
+.btn-new {
+  padding: 0.5rem 1rem;
+  border-radius: 10px;
+  font-size: 1rem;
+  cursor: pointer;
+  border: none;
+  margin-bottom: 1rem;
+}
+
+.btn-new:hover {
+  opacity: 0.9;
+}
+
+.cell {
   border: 2px solid white;
   box-sizing: border-box;
 }
 
-.col.isActive {
+.cell.isActive {
   position: relative;
 }
 
-.col.isActive::after {
+.cell[data-type="X"] {
+  color: green;
+}
+
+.cell[data-type="O"] {
+  color: orange;
+}
+
+.cell.isActive::after {
   content: attr(data-type);
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background-color: red;
+  font-size: xxx-large;
+  font-weight: 900;
 }
 
 .turn-show {
   display: flex;
   gap: 2rem;
+  padding: 0.5rem;
+}
+
+.turn-show > div {
+  font-size: 2rem;
+  font-weight: 900;
   padding: 1rem;
-  margin: 1rem;
+  margin: 0.5rem;
+  color: white;
+}
+
+.activePlayer {
+  background-color: rgb(9, 118, 57);
+  border-radius: 10px;
+  color: black;
 }

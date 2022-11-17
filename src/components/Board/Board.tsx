@@ -1,6 +1,7 @@
 import clsx from "clsx";
 import { useContext, useState } from "react";
 import { userInputContext } from "../../context/userInputContext";
+import Modal from "../Modal/Modal";
 import "./board.css";
 
 export enum MarkName {
@@ -16,39 +17,39 @@ const Board = () => {
   const boxData = [
     {
       id: 1,
-      className: "col",
+      className: "cell",
     },
     {
       id: 2,
-      className: "col",
+      className: "cell",
     },
     {
       id: 3,
-      className: "col",
+      className: "cell",
     },
     {
       id: 4,
-      className: "col",
+      className: "cell",
     },
     {
       id: 5,
-      className: "col",
+      className: "cell",
     },
     {
       id: 6,
-      className: "col",
+      className: "cell",
     },
     {
       id: 7,
-      className: "col",
+      className: "cell",
     },
     {
       id: 8,
-      className: "col",
+      className: "cell",
     },
     {
       id: 9,
-      className: "col",
+      className: "cell",
     },
   ];
 
@@ -68,8 +69,8 @@ const Board = () => {
 
     if (!winnerfound) {
       for (const [key, value] of Object.entries(activeIds)) {
-        if(value === turn){
-            activePlayerClickedBox = [...activePlayerClickedBox, Number(key), id]; 
+        if (value === turn) {
+          activePlayerClickedBox = [...activePlayerClickedBox, Number(key), id];
         }
       }
 
@@ -81,6 +82,8 @@ const Board = () => {
         ) {
           winnerfound = true;
           setWinnerPattern(winnerNumber[i]);
+          a?.setShowBoard(false);
+          a?.setWinnerPlayer(turn);
           break;
           return;
         } else {
@@ -91,12 +94,23 @@ const Board = () => {
   };
 
   return (
-    <div>
+    <div className="wrapper">
+      <h1 className="heading">Tic Tac Toe</h1>
+      <button
+        className="btn-new"
+        onClick={() => {
+          setActive({});
+          a?.setActivePlayer(MarkName.X);
+          a?.setWinnerPlayer("");
+        }}
+      >
+        New Game
+      </button>
       <div className="board">
         {boxData.map((data) => {
           return (
             <div
-              className={clsx("col", {
+              className={clsx("cell", {
                 isActive: Object.keys(active).includes(data.id.toString()),
               })}
               data-type={active[data.id]}
@@ -114,26 +128,23 @@ const Board = () => {
 
                 checkWinner(active, id, a?.activePlayer ?? MarkName.X);
 
-                a?.setActivePlayer(
-                  a.activePlayer === MarkName.O ? MarkName.X : MarkName.O
-                );
+                if (!a?.winnerPlayer) {
+                  a?.setActivePlayer(
+                    a.activePlayer === MarkName.O ? MarkName.X : MarkName.O
+                  );
+                }
               }}
             ></div>
           );
         })}
       </div>
       <div className="turn-show">
-        <div>X</div>
-        <div>0</div>
-        {winnerPattern && <p>{winnerPattern}</p>}
+        <div className={`${a?.activePlayer === "X" && "activePlayer"}`}>X</div>
+        <div className={`${a?.activePlayer === "O" && "activePlayer"}`}>0</div>
       </div>
-      <button
-        onClick={() => {
-          a?.setShowBoard(false);
-        }}
-      >
-        Restart
-      </button>
+      {a?.winnerPlayer && (
+        <Modal winnerPlayer={a?.winnerPlayer} setActive={setActive} />
+      )}
     </div>
   );
 };

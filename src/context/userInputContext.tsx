@@ -6,6 +6,8 @@ interface userInputContextProps {
   setShowBoard: React.Dispatch<React.SetStateAction<boolean>>;
   activePlayer: MarkName;
   setActivePlayer: React.Dispatch<React.SetStateAction<MarkName>>;
+  winnerPlayer: string;
+  setWinnerPlayer: React.Dispatch<React.SetStateAction<string>>;
 }
 
 const userInputContext = createContext<userInputContextProps | null>(null);
@@ -15,12 +17,14 @@ interface UserInputProviderProps {
 }
 
 const UserInputProvider = ({ children }: UserInputProviderProps) => {
-  const [showBoard, setShowBoard] = useState(false);
+  const [showBoard, setShowBoard] = useState<boolean>(false);
   const [activePlayer, setActivePlayer] = useState<MarkName>(MarkName.X);
+  const [winnerPlayer, setWinnerPlayer] = useState<string>("");
+
 
   return (
     <userInputContext.Provider
-      value={{ showBoard, setShowBoard, setActivePlayer, activePlayer }}
+      value={{ showBoard, setShowBoard, setActivePlayer, activePlayer, winnerPlayer , setWinnerPlayer}}
     >
       {children}
     </userInputContext.Provider>

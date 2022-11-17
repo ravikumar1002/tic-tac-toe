@@ -118,7 +118,7 @@ const Board = () => {
               key={data.id}
               id={data.id.toString()}
               onClick={(e) => {
-                const id = parseInt(e.target.id);
+                const id = parseInt((e.target as HTMLElement).id);
                 const activeIds = Object.keys(active);
                 if (activeIds.includes(id.toString())) return;
 
@@ -146,9 +146,16 @@ const Board = () => {
       {a?.winnerPlayer && (
         <Modal winnerPlayer={a?.winnerPlayer} setActive={setActive} />
       )}
-      {!a?.winnerPlayer && active[1] && active[2] && active[3] && active[4] && active[5] && active[6] && active[7] && active[8] &&active[9] &&   <NoOneWinnerModal setActive={setActive} />
-
-      }
+      {!a?.winnerPlayer &&
+        active[1] &&
+        active[2] &&
+        active[3] &&
+        active[4] &&
+        active[5] &&
+        active[6] &&
+        active[7] &&
+        active[8] &&
+        active[9] && <NoOneWinnerModal setActive={setActive} />}
     </div>
   );
 };
